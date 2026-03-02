@@ -1,0 +1,41 @@
+server:
+  port: 8080
+
+spring:
+  profiles:
+    active: dev
+  main:
+    allow-circular-references: true
+  datasource:
+    druid:
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      # 这里修复了 URL 拼接错误，确保每个参数之间有正确的分隔符
+      url: jdbc:mysql:// ${sky.datasource.host}:${sky.datasource.port}/${sky.datasource.database}?serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=utf-8&zeroDateTimeBehavior=convertToNull&useSSL=false&allowPublicKeyRetrieval=true
+      username: ${sky.datasource.username}
+      password: ${sky.datasource.password}
+
+mybatis:
+  mapper-locations: classpath:mapper/*.xml
+  type-aliases-package: com.sky.entity
+  configuration:
+    map-underscore-to-camel-case: true
+
+logging:
+  level:
+    com.sky.mapper: debug
+    com.sky.service: info
+    com.sky.controller: info
+
+# 👇 这里定义了 sky.datasource 的值
+sky:
+  datasource:
+    host: localhost
+    port: 3306
+    database: sky_take_out
+    username: root
+    password: 421689  # ← 请根据你的 MySQL 真实密码修改
+
+  jwt:
+    admin-secret-key: itcast
+    admin-ttl: 7200000
+    admin-token-name: token
