@@ -33,7 +33,7 @@ sky:
     port: 3306
     database: sky_take_out
     username: root
-    password: 421689  # ← 请根据你的 MySQL 真实密码修改
+    password: 421689    # ← 请根据你的 MySQL 真实密码修改
 
   jwt:
     admin-secret-key: itcast
